@@ -1,0 +1,9 @@
+/environments/*/.terraform/
+/environments/*/.terraform.lock.hcl 
+*.tfstate
+*.tfstate.backup
+crash.log
+override.tf
+override.tf.json
+terraform.tfstate.*
+.terraform.tfstate.*
