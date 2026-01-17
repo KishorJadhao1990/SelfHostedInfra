@@ -7,3 +7,4 @@ override.tf
 override.tf.json
 terraform.tfstate.*
 .terraform.tfstate.*
+.DS_Store
