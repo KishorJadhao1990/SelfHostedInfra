@@ -12,4 +12,5 @@ module "eks" {
   source          = "../../modules/eks"
   project_name    = "dev-infra"
   private_subnets = module.vpc.private_subnets
+  vpc_id          = module.vpc.vpc_id
 }
