@@ -11,7 +11,7 @@ resource "aws_eks_node_group" "node_group" {
     min_size     = 1
   }
   ami_type       = "AL2023_x86_64_STANDARD"
-  instance_types = ["t3.micro"]
+  instance_types = ["t3.medium"]
   capacity_type  = "ON_DEMAND"
 
   depends_on = [
@@ -20,4 +20,7 @@ resource "aws_eks_node_group" "node_group" {
     aws_iam_role_policy_attachment.node_AmazonEC2ContainerRegistryReadOnly
   ]
 
+  # tags = {
+  #   k8s.io_cluster_autoscaler/enabled = "true"
+  # }
 }
