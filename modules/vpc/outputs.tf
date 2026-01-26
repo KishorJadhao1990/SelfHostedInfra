@@ -1,5 +1,5 @@
-output "project_name" {
-  value = var.project_name
+output "vpv_name" {
+  value = aws_vpc.vpc.Name
 }
 
 output "vpc_id" {

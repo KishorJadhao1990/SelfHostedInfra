@@ -10,7 +10,7 @@ resource "aws_nat_gateway" "nat" {
   subnet_id     = aws_subnet.public_subnets[count.index].id
   allocation_id = aws_eip.eip[count.index].id
     tags = {
-        Name = "${var.project_name}-nat-${element(var.availability_zones, count.index)}"
+        Name = "${var.project_name}-${element(var.availability_zones, count.index)}-nat"
     }
 }
 

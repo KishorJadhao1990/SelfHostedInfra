@@ -5,8 +5,8 @@ resource "aws_subnet" "public_subnets" {
   availability_zone = var.availability_zones[count.index]
 
   tags = {
-    "Name" = "${var.project_name}-public-subnet-${element(var.availability_zones, count.index)}"
-    "kubernetes.io/cluster/${var.project_name}-eks-cluster" = "shared"
+    "Name" = "${var.project_name}-${var.availability_zones[count.index]}-public-subnet"
+    "kubernetes.io/cluster/${var.project_name}-eks-cluster" = "owned"
     "kubernetes.io/role/elb" = "1"
   }
 }
@@ -18,8 +18,8 @@ resource "aws_subnet" "private_subnets" {
   availability_zone = var.availability_zones[count.index]
 
   tags = {
-    "Name" = "${var.project_name}-private-subnet-${element(var.availability_zones, count.index)}"
-    "kubernetes.io/cluster/${var.project_name}-eks-cluster" = "shared"
+    "Name" = "${var.project_name}-${var.availability_zones[count.index]}-private-subnet"
+    "kubernetes.io/cluster/${var.project_name}-eks-cluster" = "owned"
     "kubernetes.io/role/internal-elb" = "1"
   }
 }
@@ -31,7 +31,7 @@ resource "aws_subnet" "database_subnets" {
   availability_zone = var.availability_zones[count.index]
 
   tags = {
-    "Name" = "${var.project_name}-database-subnet-${element(var.availability_zones, count.index)}"
+    "Name" = "${var.project_name}-${var.availability_zones[count.index]}-database-subnet"
   }
 }
 
@@ -43,7 +43,7 @@ resource "aws_route_table" "public_subnet_rt" {
   }
 
   tags = {
-    Name = "${var.project_name}-public-subnet-rt"
+    Name = "${var.project_name}-${var.availability_zones[count.index]}-public-subnet-rt"
   }
 }
 
@@ -56,7 +56,7 @@ resource "aws_route_table" "private_subnet_rt" {
   }
 
   tags = {
-    Name = "${var.project_name}-private-subnet-${element(var.availability_zones, count.index)}-rt"
+    Name = "${var.project_name}-${var.availability_zones[count.index]}-private-subnet-rt"
   }
 }
 
@@ -69,7 +69,7 @@ resource "aws_route_table" "database_subnet_rt" {
   }
 
   tags = {
-    Name = "${var.project_name}-database-subnet-${element(var.availability_zones, count.index)}-rt"
+    Name = "${var.project_name}-${var.availability_zones[count.index]}-database-subnet-${element(var.availability_zones, count.index)}-rt"
   }
 }
 

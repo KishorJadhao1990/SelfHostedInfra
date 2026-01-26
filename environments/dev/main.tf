@@ -1,16 +1,16 @@
 module "vpc" {
   source             = "../../modules/vpc"
-  project_name       = "dev-infra"
-  cidr_block         = "10.0.0.0/16"
-  availability_zones = ["ap-south-1a", "ap-south-1b"]
-  public_subnets     = ["10.0.1.0/24", "10.0.2.0/24"]
-  private_subnets    = ["10.0.3.0/24", "10.0.4.0/24"]
-  database_subnets   = ["10.0.5.0/24", "10.0.6.0/24"]
+  project_name       = var.project_name
+  region             = var.region
+  cidr_block         = var.cidr_block
+  availability_zones = var.availability_zones
+  public_subnets     = var.public_subnets
+  private_subnets    = var.private_subnets
+  database_subnets   = var.database_subnets
 }
 
-module "eks" {
-  source          = "../../modules/eks"
-  project_name    = "dev-infra"
-  private_subnets = module.vpc.private_subnets
-  vpc_id          = module.vpc.vpc_id
-}
+#   source          = "../../modules/eks"
+#   project_name    = "dev-infra"
+#   private_subnets = module.vpc.private_subnets
+#   vpc_id          = module.vpc.vpc_id
+# }
