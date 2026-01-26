@@ -1,5 +1,5 @@
 output "vpv_name" {
-  value = aws_vpc.vpc.Name
+  value = aws_vpc.vpc.tags.Name
 }
 
 output "vpc_id" {
