@@ -12,3 +12,11 @@
 - Each instance has docker installed with user data script.
 - Create postgres container and map to 5432 port with host.
 - Deploy Application on EC2. Connect database using stored secrets
+
+
+### Deployement working example
+https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/refs/heads/main/docs/examples/2048/2048_full.yaml
+
+
+### ALB installation guide
+https://github.com/iam-veeramalla/aws-devops-zero-to-hero/blob/main/day-22/2048-app-deploy-ingress.md
