@@ -69,7 +69,7 @@ resource "aws_route_table" "database_subnet_rt" {
   }
 
   tags = {
-    Name = "${var.project_name}-${var.availability_zones[count.index]}-database-subnet-${element(var.availability_zones, count.index)}-rt"
+    Name = "${var.project_name}-${var.availability_zones[count.index]}-database-subnet-rt"
   }
 }
 
