@@ -9,8 +9,34 @@ module "vpc" {
   database_subnets   = var.database_subnets
 }
 
-#   source          = "../../modules/eks"
-#   project_name    = "dev-infra"
-#   private_subnets = module.vpc.private_subnets
-#   vpc_id          = module.vpc.vpc_id
-# }
+module "eks" {
+  source          = "../../modules/eks"
+  vpc_id          = module.vpc.vpc_id
+  cluster_name    = "${var.project_name}-eks-cluster"
+  private_subnets = module.vpc.private_subnets
+
+  // Node Group Configurations
+  node_groups = {
+    compute  = {
+      enabled        = true
+      ami_type       = "AL2023_x86_64_STANDARD"
+      instance_types = ["t3.large"]
+      capacity_type  = "ON_DEMAND"
+      desired_size   = 2
+      min_size       = 1
+      max_size       = 4
+    },
+
+    general  = {
+      enabled        = true
+      ami_type       = "AL2023_x86_64_STANDARD"
+      instance_types = ["t3.medium"]
+      capacity_type  = "ON_DEMAND"
+      desired_size   = 4
+      min_size       = 2
+      max_size       = 6
+    }
+  }
+
+  depends_on = [module.vpc]
+}
