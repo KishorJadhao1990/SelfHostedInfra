@@ -18,7 +18,7 @@ module "eks" {
   // Node Group Configurations
   node_groups = {
     compute  = {
-      enabled        = true
+      enabled        = false
       ami_type       = "AL2023_x86_64_STANDARD"
       instance_types = ["t3.large"]
       capacity_type  = "ON_DEMAND"
