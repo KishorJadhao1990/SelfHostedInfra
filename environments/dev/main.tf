@@ -17,3 +17,33 @@ module "eks" {
   node_groups     = var.node_groups
   depends_on      = [module.vpc]
 }
+
+module "db" {
+  source        = "../../modules/db"
+  vpc_id        = module.vpc.vpc_id
+  instance_type = var.instance_type
+  subnet_id     = module.vpc.database_subnets[0]
+  key_name      = var.key_name
+  depends_on    = [module.vpc]
+
+  tags = {
+    Name        = "${var.project_name}-postgres-db"
+    Environment = "development"
+  }
+}
+
+
+# module "postgres_standby_db" {
+#   source        = "../../modules/db"
+#   vpc_id        = module.vpc.vpc_id
+#   ami           = var.ami
+#   instance_type = var.instance_type
+#   subnet_id     = module.vpc.database_subnets[1]
+#   key_name      = var.key_name
+#   depends_on    = [module.vpc]
+
+#   tags = {
+#     Name        = "${var.project_name}-standby-db"
+#     Environment = "development"
+#   }
+# }

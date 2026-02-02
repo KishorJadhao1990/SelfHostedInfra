@@ -30,3 +30,8 @@ node_groups = {
     max_size       = 4
   }
 }
+
+
+# Database Server configuration for Development Environment
+instance_type = "m6i.large"
+key_name      = "ec2pair"

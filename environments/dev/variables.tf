@@ -18,3 +18,7 @@ variable "node_groups" {
     max_size       = number
   }))
 }
+
+
+variable "instance_type" { type = string }
+variable "key_name" { type = string }
