@@ -15,6 +15,7 @@ module "eks" {
   cluster_name    = var.cluster_name
   private_subnets = module.vpc.private_subnets
   node_groups     = var.node_groups
+
   depends_on      = [module.vpc]
 }
 
@@ -25,8 +26,8 @@ module "db" {
   instance_type = var.instance_type
   subnet_id     = module.vpc.database_subnets[0]
   key_name      = var.key_name
+  
   depends_on    = [module.vpc]
-
   tags          = var.tags
 }
 
