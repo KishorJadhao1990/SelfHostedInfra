@@ -1,18 +1,5 @@
-data "aws_ami" "ubuntu" {
-  most_recent = true
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
-  }
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-  owners = ["099720109477"]
-}
-
 resource "aws_instance" "postgres_db" {
-  ami           = data.aws_ami.ubuntu.id
+  ami           = var.ami
   instance_type = var.instance_type
   subnet_id     = var.subnet_id
   key_name      = var.key_name
@@ -26,13 +13,12 @@ resource "aws_instance" "postgres_db" {
   }
 
   user_data = file("${path.module}/user-data.sh")
-
   tags = var.tags
 }
 
 
-resource "aws_security_group" "postgres_sg" {
-  name        = "postgres_sg"
+resource "aws_security_group" "database_sg" {
+  name        = "database_sg"
   vpc_id      = var.vpc_id
   description = "Security group for database instance"
 
@@ -57,5 +43,4 @@ resource "aws_security_group" "postgres_sg" {
     cidr_blocks = ["0.0.0.0/0"]
     description = "Allow all outbound traffic"
   }
-
 }

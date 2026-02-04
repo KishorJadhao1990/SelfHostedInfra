@@ -33,5 +33,10 @@ node_groups = {
 
 
 # Database Server configuration for Development Environment
+ami           = "ami-019715e0d74f695be" # Ubuntu 24.04 LTS AMI ID in us-east-1
 instance_type = "m6i.large"
 key_name      = "ec2pair"
+tags = {
+    Name        = "ssf-dev-postgres-db"
+    Environment = "development"
+}

@@ -7,7 +7,7 @@ variable "node_groups" {
     enabled          = bool
     ami_type         = string
     instance_types   = list(string)
-    capacity_type    = string # ON_DEMAND | SPOT
+    capacity_type    = string       
     desired_size     = number
     min_size         = number
     max_size         = number

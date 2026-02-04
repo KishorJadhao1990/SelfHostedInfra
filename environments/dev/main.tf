@@ -9,27 +9,25 @@ module "vpc" {
   database_subnets   = var.database_subnets
 }
 
-module "eks" {
-  source          = "../../modules/eks"
-  vpc_id          = module.vpc.vpc_id
-  cluster_name    = var.cluster_name
-  private_subnets = module.vpc.private_subnets
-  node_groups     = var.node_groups
-  depends_on      = [module.vpc]
-}
+# module "eks" {
+#   source          = "../../modules/eks"
+#   vpc_id          = module.vpc.vpc_id
+#   cluster_name    = var.cluster_name
+#   private_subnets = module.vpc.private_subnets
+#   node_groups     = var.node_groups
+#   depends_on      = [module.vpc]
+# }
 
 module "db" {
   source        = "../../modules/db"
+  ami           = var.ami
   vpc_id        = module.vpc.vpc_id
   instance_type = var.instance_type
   subnet_id     = module.vpc.database_subnets[0]
   key_name      = var.key_name
   depends_on    = [module.vpc]
 
-  tags = {
-    Name        = "${var.project_name}-postgres-db"
-    Environment = "development"
-  }
+  tags          = var.tags
 }
 
 

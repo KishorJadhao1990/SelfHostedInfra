@@ -14,4 +14,7 @@ sudo systemctl enable postgresql
 
 # Verify installation
 psql --version
-systemctl status postgresql --no-pager
+systemctl status postgresql
+
+# Set password for the postgres user
+sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
