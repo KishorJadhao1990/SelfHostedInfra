@@ -9,14 +9,14 @@ module "vpc" {
   database_subnets   = var.database_subnets
 }
 
-# module "eks" {
-#   source          = "../../modules/eks"
-#   vpc_id          = module.vpc.vpc_id
-#   cluster_name    = var.cluster_name
-#   private_subnets = module.vpc.private_subnets
-#   node_groups     = var.node_groups
-#   depends_on      = [module.vpc]
-# }
+module "eks" {
+  source          = "../../modules/eks"
+  vpc_id          = module.vpc.vpc_id
+  cluster_name    = var.cluster_name
+  private_subnets = module.vpc.private_subnets
+  node_groups     = var.node_groups
+  depends_on      = [module.vpc]
+}
 
 module "db" {
   source        = "../../modules/db"
