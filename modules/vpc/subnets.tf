@@ -65,7 +65,7 @@ resource "aws_route_table" "database_subnet_rt" {
   count         = length(aws_subnet.database_subnets)
   route {
     cidr_block = "0.0.0.0/0"
-    # gateway_id = aws_nat_gateway.nat[count.index].id           # Optional: If you want to route DB subnet traffic through NAT
+    gateway_id = aws_nat_gateway.nat[count.index].id           # Optional: If you want to route DB subnet traffic through NAT
   }
 
   tags = {
